@@ -1,0 +1,5 @@
+# macOS
+.DS_Store
+
+# General
+.COMMIT_MSG
