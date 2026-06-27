@@ -11,15 +11,17 @@ return {
     { '<leader>fh', '<cmd>FzfLua helptags<cr>', desc = 'Help tags' },
     { '<leader>fw', '<cmd>FzfLua grep_cword<cr>', desc = 'Grep word under cursor' },
   },
-  opts = {
-    fzf_colors = true,
-    winopts = {
-      heigh = 0.60,
-      width = 0.50,
-      preview = { hidden = true },
-    },
-    files = {
-      cwd_prompt = false,
-    },
-  },
+  opts = function ()
+    local fzf = require('fzf-lua')
+    return {
+      fzf_colors = true,
+      winopts = { height = 0.60, width = 0.50, preview = { hidden = true }, },
+      files = { cwd_prompt = false, },
+      actions = {
+        files = vim.tbl_extend('force', fzf.defaults.actions.files, {
+          ['enter'] = fzf.actions.file_edit,
+        })
+      },
+    }
+  end,
 }
