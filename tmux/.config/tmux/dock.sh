@@ -16,7 +16,7 @@ if [ -n "$pane" ] && [ "$(tmux display -p -t "$pane" '#{window_id}')" = "$owner"
     && [ "$(tmux display -p -t "$owner" '#{pane_id}')" = "$pane" ] \
     && tmux resize-pane -Z -t "$pane"
   ensure_park
-  tmux break-pane -d -s "$pane" -t "$park:"
+  tmux join-pane -s "$pane" -t "$park:"
   exit 0
 fi
 
