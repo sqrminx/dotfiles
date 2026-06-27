@@ -19,3 +19,8 @@ map({ 'n', 'o', 'x' }, 'à', ']', { remap = true, desc = 'AZERTY: Act as ]' })
 
 -- Terminal
 map({ 't' }, '<esc><esc>', [[<C-\><C-n>]], { desc = 'Exit terminal mode' })
+
+-- Project tasks (make)
+map({ 'n' }, '<leader>cb', '<cmd>Build make<cr>', { desc = 'Build' })
+map({ 'n' }, '<leader>cc', '<cmd>Build make clean<cr>', { desc = 'Clean' })
+map({ 'n' }, '<leader>ct', '<cmd>Run make test<cr>', { desc = 'Test' })
