@@ -14,6 +14,8 @@ return {
         Whitespace = { fg = colors.red },
         NormalFloat = { bg = 'NONE' },
         FloatBorder = { fg = colors.surface1, bg = 'NONE' },
+        BlinkCmpMenu = { bg = colors.surface0 },
+        BlinkCmpDoc = { bg = colors.surface0 },
       }
     end,
     integrations = {

@@ -5,6 +5,7 @@ return {
   event = { 'BufReadPre', 'BufNewFile' },
   opts = {
     signs_staged_enable = true,
+    preview_config = { border = 'rounded' },
     on_attach = function (buf)
       local gs = require('gitsigns')
       local function map(mode, lhs, rhs, desc)
