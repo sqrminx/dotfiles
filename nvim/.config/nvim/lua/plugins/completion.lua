@@ -3,21 +3,18 @@
 return {
   'saghen/blink.cmp',
   version = '1.*',
-  dependencies = { 'rafamadriz/friendly-snippets' },
   opts = {
     keymap = {
-      preset = 'enter',
-      ['<tab>'] = { 'select_next', 'snippet_forward', 'fallback' },
-      ['<s-tab>'] = { 'select_next', 'snippet_backward', 'fallback' },
+      preset = 'super-tab',
     },
     appearance = { nerd_font_variant = 'mono' },
     completion = {
       documentation = { auto_show = true, auto_show_delay_ms = 200 },
-      ghost_text = { enabled = true }
+      ghost_text = { enabled = false }
     },
     signature = { enabled = true },
     sources = {
-      default = { 'lsp', 'path', 'snippets' },
+      default = { 'lsp', 'path' },
     },
   },
   config = function (_, opts)

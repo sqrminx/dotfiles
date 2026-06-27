@@ -16,6 +16,7 @@ return {
         FloatBorder = { fg = colors.surface1, bg = 'NONE' },
         BlinkCmpMenu = { bg = colors.surface0 },
         BlinkCmpDoc = { bg = colors.surface0 },
+        BlinkCmpSignatureHelp = { bg = colors.surface0 },
       }
     end,
     integrations = {
