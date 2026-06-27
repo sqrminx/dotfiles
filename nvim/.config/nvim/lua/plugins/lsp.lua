@@ -36,7 +36,7 @@ return {
         map('gd', vim.lsp.buf.definition, 'Go to definition')
         map('<leader>k', vim.lsp.buf.hover, 'Hover')
         map('<leader>e', vim.diagnostic.open_float, 'Line diagnostics')
-        map('<leader>f', function() vim.lsp.buf.format({ async = true }) end, 'Format')
+        map('<leader>cf', function() vim.lsp.buf.format({ async = true }) end, 'Format')
       end
     })
   end,
