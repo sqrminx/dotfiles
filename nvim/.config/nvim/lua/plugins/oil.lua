@@ -11,6 +11,9 @@ return {
   opts = {
     default_file_explorer = true,
     view_options = { show_hidden = true },
+    float = { border = 'rounded' },
+    confirmation = { border = 'rounded' },
+    progress = { border = 'rounded' },
     keymaps = {
       ['<C-h>'] = false,
       ['<C-l>'] = false,

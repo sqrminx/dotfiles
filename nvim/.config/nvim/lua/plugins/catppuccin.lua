@@ -12,8 +12,8 @@ return {
       return {
         MsgArea = { fg = colors.overlay2 },
         Whitespace = { fg = colors.red },
-        FzfLuaNormal = { fg = colors.text, bg = 'NONE' },
-        FzfLuaBorder = { fg = colors.surface1, bg = 'NONE' },
+        NormalFloat = { bg = 'NONE' },
+        FloatBorder = { fg = colors.surface1, bg = 'NONE' },
       }
     end,
     integrations = {
