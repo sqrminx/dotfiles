@@ -33,6 +33,9 @@ return {
           vim.keymap.set('n', lhs, rhs, { buffer = ev.buf, silent = true, desc = desc })
         end
 
+        -- The LSP gives for free:
+        -- grn: rename, gra: code action, grr: references,
+        -- gri: implementation, grt: type definition, 'gO': symbols
         map('gd', vim.lsp.buf.definition, 'Go to definition')
         map('<leader>k', vim.lsp.buf.hover, 'Hover')
         map('<leader>e', vim.diagnostic.open_float, 'Line diagnostics')
