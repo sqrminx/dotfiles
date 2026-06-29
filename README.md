@@ -8,10 +8,11 @@ Personal macOS dotfiles, managed with GNU Stow.
 - ghostty, tmux ≥ 3.2, Neovim ≥ 0.11
 - A Nerd Font (configured for Lilex Nerd Font)
 - `ripgrep` + `fzf` - Neovim's finder
+- `tree-sitter-cli` - builds Neovim's treesitter parsers
 - Language servers: `lua-language-server`, `clangd`
 
 ```sh
-brew install stow tmux neovim ripgrep fzf lua-language-server
+brew install stow tmux neovim ripgrep fzf lua-language-server tree-sitter-cli
 ```
 
 ## Install
