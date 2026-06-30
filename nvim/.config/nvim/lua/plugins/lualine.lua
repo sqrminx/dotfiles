@@ -2,7 +2,10 @@
 
 return {
   'nvim-lualine/lualine.nvim',
-  dependencies = { 'nvim-tree/nvim-web-devicons' },
+  dependencies = {
+    'nvim-tree/nvim-web-devicons',
+    'lewis6991/gitsigns.nvim',
+  },
   config = function()
     local C = require('catppuccin.palettes').get_palette('macchiato')
     local flat = {
@@ -33,7 +36,15 @@ return {
         lualine_a = { { 'mode', right_padding = 2 } },
         lualine_b = {
           { 'filename', path = 1, symbols = { modified = '', readonly = '' } },
-          'diff',
+          {
+            'diff',
+            source = function ()
+              local gs = vim.b.gitsigns_status_dict
+              if gs then
+                return { added = gs.added, modified = gs.changed, removed = gs.removed }
+              end
+            end,
+          }
         },
         lualine_c = {},
         lualine_x = { 'diagnostics' },
