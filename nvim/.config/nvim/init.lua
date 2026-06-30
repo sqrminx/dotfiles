@@ -5,6 +5,7 @@ vim.g.maplocalleader = ' '
 -- Core config
 require('config.options')
 require('config.keymaps')
+require('config.filetype')
 require('config.autocmds')
 require('config.commands')
 

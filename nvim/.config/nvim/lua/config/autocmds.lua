@@ -52,3 +52,19 @@ autocmd('BufReadPost', {
     end
   end,
 })
+
+-- Color column
+autocmd('FileType', {
+  pattern = { 'c' },
+  callback = function () vim.opt_local.colorcolumn = '100' end,
+})
+
+autocmd('FileType', {
+  pattern = { 'markdown', 'text' },
+  callback = function () vim.opt_local.colorcolumn = '80' end,
+})
+
+autocmd('FileType', {
+  pattern = { 'gitcommit' },
+  callback = function () vim.opt_local.colorcolumn = '72' end,
+})

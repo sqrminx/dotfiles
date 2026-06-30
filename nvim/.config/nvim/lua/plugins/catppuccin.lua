@@ -8,12 +8,14 @@ return {
     flavour = 'macchiato',
     transparent_background = true,
     term_colors = true,
-    custom_highlights = function(colors)
+    custom_highlights = function (colors)
       return {
         MsgArea = { fg = colors.overlay2 },
         Whitespace = { fg = colors.red },
         NormalFloat = { bg = 'NONE' },
         FloatBorder = { fg = colors.surface1, bg = 'NONE' },
+        gitcommitOverflow = { fg = colors.red },
+        gitcommitSummary = { fg = colors.text, bold = true },
         BlinkCmpMenu = { bg = colors.surface0 },
         BlinkCmpDoc = { bg = colors.surface0 },
         BlinkCmpSignatureHelp = { bg = colors.surface0 },
@@ -25,7 +27,7 @@ return {
       native_lsp = { enabled = true },
     },
   },
-  config = function(_, opts)
+  config = function (_, opts)
     require('catppuccin').setup(opts)
     vim.cmd.colorscheme('catppuccin')
   end,
