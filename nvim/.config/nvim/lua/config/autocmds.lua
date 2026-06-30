@@ -55,7 +55,7 @@ autocmd('BufReadPost', {
 
 -- Color column
 autocmd('FileType', {
-  pattern = { 'c' },
+  pattern = { 'c', 'lua', 'sh', 'bash', 'zsh' },
   callback = function () vim.opt_local.colorcolumn = '100' end,
 })
 
