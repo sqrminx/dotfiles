@@ -17,6 +17,7 @@ return {
       fzf_colors = true,
       winopts = { height = 0.60, width = 0.50, preview = { hidden = true }, },
       files = { cwd_prompt = false, },
+      grep = { winopts = { width = 0.90 } },
       actions = {
         files = vim.tbl_extend('force', fzf.defaults.actions.files, {
           ['enter'] = fzf.actions.file_edit,
