@@ -12,6 +12,8 @@ return {
       return {
         MsgArea = { fg = colors.overlay2 },
         Whitespace = { fg = colors.red },
+        FoldArrowClosed = { fg = colors.pink },
+        FoldArrowOpen = { fg = colors.overlay2 },
         NormalFloat = { bg = 'NONE' },
         FloatBorder = { fg = colors.surface1, bg = 'NONE' },
         gitcommitOverflow = { fg = colors.red },
