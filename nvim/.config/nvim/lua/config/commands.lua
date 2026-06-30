@@ -4,6 +4,7 @@
 -- Opens quickfix on failure, closes it, and notifies on success.
 local function build(opts)
   local cmd = opts.args ~= '' and opts.args or 'make'
+  local efm = vim.o.errorformat
   local lines = {}
   local function collect(_, data)
     if data then
@@ -19,12 +20,13 @@ local function build(opts)
     on_stdout = collect,
     on_stderr = collect,
     on_exit = function (_, code)
-      vim.fn.setqflist({}, ' ', { title = cmd, lines = lines, efm = vim.o.errorformat })
+      vim.fn.setqflist({}, ' ', { title = cmd, lines = lines, efm = efm })
       if code == 0 then
         vim.cmd('cclose')
         vim.notify(cmd .. ' ✓')
       else
         vim.cmd('copen')
+        vim.notify(cmd .. ' ✗', vim.log.levels.ERROR)
       end
     end,
   })
@@ -36,7 +38,7 @@ vim.api.nvim_create_user_command('Build', build, { nargs = '*', desc = 'Async bu
 local function run(opts)
   local origin = vim.api.nvim_get_current_win()
 
-  vim.cmd('botright 15new')
+  vim.cmd('botright 10new')
   local win = vim.api.nvim_get_current_win()
   local buf = vim.api.nvim_get_current_buf()
 
@@ -66,6 +68,9 @@ local function run(opts)
         if vim.api.nvim_buf_is_valid(buf) then
           vim.api.nvim_buf_delete(buf, { force = true })
         end
+        vim.notify(opts.args .. ' ✓')
+      else
+        vim.notify(opts.args .. ' ✗', vim.log.levels.ERROR)
       end
     end
   })
