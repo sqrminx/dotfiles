@@ -4,7 +4,7 @@ owner="$1"
 dir="$2"
 side="${3:-left}"
 size="${4:-40%}"
-park="_dock_park"
+park="_dock_${owner#@}"
 cmd="${DOCK_CMD:-claude}"
 
 ensure_park() { tmux has-session -t "=$park" 2>/dev/null || tmux new-session -d -s "$park"; }
