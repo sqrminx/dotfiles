@@ -15,7 +15,15 @@ return {
     local fzf = require('fzf-lua')
     return {
       fzf_colors = true,
-      winopts = { height = 0.60, width = 0.50, preview = { hidden = true }, },
+      winopts = {
+        height = 0.60,
+        width = 0.50,
+        preview = { hidden = true },
+        on_create = function ()
+          vim.keymap.set('t', '<C-j>', '<C-j>', { buffer = true })
+          vim.keymap.set('t', '<C-k>', '<C-k>', { buffer = true })
+        end,
+      },
       files = { cwd_prompt = false, },
       grep = { winopts = { width = 0.90 } },
       actions = {

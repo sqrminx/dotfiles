@@ -6,6 +6,8 @@ return {
   opts = {
     keymap = {
       preset = 'super-tab',
+      ['<c-j>'] = { 'select_next', 'fallback' },
+      ['<c-k>'] = { 'select_prev', 'fallback' },
     },
     appearance = { nerd_font_variant = 'mono' },
     completion = {
