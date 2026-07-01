@@ -57,15 +57,39 @@ local function ts_chunks(foldstart)
 
   local row, len = foldstart - 1, #line
   local hl, prio = {}, {}
+
   for id, node, metadata in query:iter_captures(tree:root(), 0, row, row + 1) do
     local sr, sc, er, ec = node:range()
-    if sr <= row and er >= row then
+    local name = query.captures[id]
+    if name:sub(1, 1) ~= '_' and sr <= row and er >= row then
       local s = (sr == row) and sc or 0
       local e = (er == row) and ec or len
       local p = tonumber(metadata.priority) or 100
-      local group = '@' .. query.captures[id]
       for col = s, e - 1 do
-        if prio[col] == nil or p >= prio[col] then hl[col], prio[col] = group, p end
+        if prio[col] == nil or p >= prio[col] then hl[col], prio[col] = '@' .. name, p end
+      end
+    end
+  end
+
+  local fgc = {}
+  local function has_fg(g)
+    if fgc[g] == nil then
+      local okh, h = pcall(vim.api.nvim_get_hl, 0, { name = g, link = false })
+      fgc[g] = okh and h.fg ~= nil
+    end
+    return fgc[g]
+  end
+  for nsname, ns in pairs(vim.api.nvim_get_namespaces()) do
+    if nsname:match('nvim%.lsp%.semantic_tokens') then
+      for _, m in ipairs(vim.api.nvim_buf_get_extmarks(0, ns, { row, 0 }, { row, -1 }, { details = true })) do
+        local sc, d = m[3], m[4]
+        local g, p = d.hl_group, d.priority or 125
+        if g and has_fg(g) then
+          local e = math.min(d.end_col or sc, len)
+          for col = sc, e - 1 do
+            if prio[col] == nil or p >= prio[col] then hl[col], prio[col] = g, p end
+          end
+        end
       end
     end
   end
@@ -82,17 +106,9 @@ end
 
 function M.text()
   local chunks = ts_chunks(vim.v.foldstart)
-  local last = vim.fn.getline(vim.v.foldend):gsub('^%s*', '')
-  local close = last:match('^[%)%]}]+')
-  if not close and last:match('^end%f[%W]') then close = 'end' end
 
   chunks[#chunks + 1] = { ' ', 'Normal' }
   chunks[#chunks + 1] = { '...', 'Comment' }
-  if close then
-    local hl = close:match('^%a') and '@keyword' or '@punctuation.bracket'
-    chunks[#chunks + 1] = { ' ', 'Normal' }
-    chunks[#chunks + 1] = { close, hl }
-  end
   return chunks
 end
 
